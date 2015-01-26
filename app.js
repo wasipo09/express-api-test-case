@@ -27,7 +27,7 @@ app.use('/api', apiRoute);
 
 //Default route
 app.get('*', function(req, res) {
-  res.send('Welcome to the home page!');
+  res.sendFile(path.join(__dirname + '/public/views/layout.html'));
 });
 
 //Exported to server file
