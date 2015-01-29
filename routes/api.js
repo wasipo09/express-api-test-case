@@ -4,11 +4,13 @@ var User = require('../models/user');
 var jwt = require('jsonwebtoken');
 var secret = config.secret;
 
+
 //Api routes
 module.exports = function(express, app) {
 
   var apiRouter = express.Router();
-
+  var taskRouter = require('../routes/task')(express, app);
+  
   //Authentication
   apiRouter.post('/authenticate', function(req, res) {
     User.findOne({ username: req.body.username }).select('name username password isAdmin').exec(function(err, user) {
@@ -74,14 +76,11 @@ module.exports = function(express, app) {
     }
   });
   
-  //Data Service
-  apiRouter.get('/', function(req, res){
-    res.json({message: 'Api at your service, sir'});  
-  });
-  
+  //Data Service 
   apiRouter.get('/me', function(req, res) {
     res.send(req.decoded);
   });
 
+  apiRouter.use('/task', taskRouter);
   return apiRouter;
 };
