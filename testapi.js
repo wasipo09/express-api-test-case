@@ -3,7 +3,7 @@ var request = require('superagent');
 var expect = require('expect.js');
 
   //URL
-  var url = 'localhost:3000/api';
+var url = 'http://taskapitest.herokuapp.com/api';
   
   //Authentication Information
   var user = 'test111';

@@ -17,7 +17,8 @@
     "bcrypt-nodejs": "0.0.3",
     "jsonwebtoken": "^3.2.2",
     "mongoose": "^3.8.22",
-    "mocha": "^2.1.0"
+    "mocha": "^2.1.0",
+    "mongoose-unique-validator": "^0.4.1"
   },
   "engines": {
     "node": "0.10.x"
