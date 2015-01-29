@@ -28,7 +28,7 @@ module.exports = function(express, app) {
           //Don't let the hashed password leaked
           var select = {_id: user._id, name: user.username, username: user.username, isAdmin: user.isAdmin};
           var token = jwt.sign(select, secret, {expiresInMinutes: 1440});
-          res.json({success: true, message: 'Welcome', token: token});
+          res.status(200).json({success: true, message: 'Welcome', token: token});
         }
       }
     });
@@ -40,22 +40,12 @@ module.exports = function(express, app) {
     user.password = req.body.password;
     
     user.save(function(err){
-      if (err) res.send(err);
-      
-      res.json({message: 'User created'});
-    });
-  });
-  apiRouter.post('/registeradmin', function(req, res){
-    var user = new User();
-    user.name = req.body.name;
-    user.username = req.body.username;
-    user.password = req.body.password;
-    user.isAdmin = true;
-   
-    user.save(function(err){
-      if (err) res.send(err);
-      
-      res.json({message: 'Admin user created'});
+      if (err) {
+        res.json({success: false, message: err});
+      }
+      else {
+        res.json({success: true, message: 'User created'});
+       } 
     });
   });
   apiRouter.use(function(req, res, next){
@@ -64,9 +54,9 @@ module.exports = function(express, app) {
     if (token) {
       jwt.verify(token, secret, function(err, decoded){
         if (err) {
-          return res.json({success: false, message: 'Failed to authenticate'});
+          return res.status(403).json({success: false, message: 'Failed to authenticate'});
         } else {
-          console.log(decoded);
+
           req.decoded = decoded;  
           next();
         }

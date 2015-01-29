@@ -10,7 +10,7 @@ module.exports = function(express, app) {
   * POST   /api/task        C   (taskname, isdone)
   * GET    /api/task        R   Get all my task
   * GET    /api/task/:id    R   (_id, taskname, isdone, createddate, name)
-  * PUT    /api/task/:id    U   (_id, taskname, isdone, createddate)
+  * PUT    /api/task/:id    U   (_id, taskname, isdone)
   * DEL    /api/task/:id    D   (_id)
   
   */
@@ -30,16 +30,16 @@ module.exports = function(express, app) {
         task.user = req.decoded._id;
         
         task.save(function(err){
-          if (err) res.json({success: false, message: 'Error'});
+          if (err) res.json({success: false, message:err});
           
-          res.json({success: true, message: 'Save completed'});
+          res.json({success: true, message: 'Save completed', data: task});
         });
         
       })
       .get(function(req, res){
         //Get all tasks
         Task.find({user:req.decoded._id}).exec(function(err, tasks){
-          if (err) res.json({success: false, message:'Error'});
+          if (err) res.json({success: false, message:err});
           
           res.json({success: true, data: tasks});
         });
@@ -51,9 +51,9 @@ module.exports = function(express, app) {
         //Get one task
         var id = req.params.id;
         Task.findOne({user: req.decoded._id, _id:id}).exec(function(err, task){
-          if (err) res.json({success: false, message:'Error'});
+          if (err) res.json({success: false, message:err});
 
-          res.json({success: true, data: task.to.getone});
+          res.json({success: true, data: task});
         });
       })
       .put(function(req, res){
@@ -63,13 +63,13 @@ module.exports = function(express, app) {
         
         var id = req.params.id;
         Task.findOne({user: req.decoded._id, _id:id}).exec(function(err, task){
-          if (err) res.json({success: false, message:'Error'});
+          if (err) res.json({success: false, message:err});
           
           if (taskname) task.taskname = taskname;
           if (isdone) task.isdone = isdone;
           
           task.save(function(err){
-            if (err) res.json({success: false, message:'Error'});
+            if (err) res.json({success: false, message:err});
             
             res.json({success: true, data: task});
           });
@@ -79,7 +79,7 @@ module.exports = function(express, app) {
         //Delete one task        
         var id = req.params.id;
         Task.remove({_id:id}, function(err, task){
-          if (err) res.json({success: false, message:'Error'});
+          if (err) res.json({success: false, message:err});
           
           res.json({success: true, message: "Task deleted"});
         });
