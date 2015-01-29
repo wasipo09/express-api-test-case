@@ -1,4 +1,5 @@
-# Task Simple API
+# To-Do List API Server 
+
 ## API Routes
 
 * POST   /api/authenticate    (username, password)
@@ -9,8 +10,21 @@
 * PUT    /api/task/:id    U   (_id, taskname, isdone, createddate)
 * DEL    /api/task/:id    D   (_id)
 
-## Models
-### Task Model
+## Test Case
 
+Install all dependencies by
+``` sh
+npm install
+```
 
-### User Model
+Then run the server
+``` sh
+npm start
+```
+
+And have fun testing
+``` sh
+npm test
+```
+
+Be sure to check out the test case file in /testapi.js
