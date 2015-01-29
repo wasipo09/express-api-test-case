@@ -2,13 +2,13 @@
 
 ## API Routes
 
-* POST   /api/authenticate    (username, password)
-* POST   /api/register        (username, password)
-* POST   /api/task        C   (taskname, isdone)
-* GET    /api/task        R   Get all my task
-* GET    /api/task/:id    R   (_id, taskname, isdone, createddate, name)
-* PUT    /api/task/:id    U   (_id, taskname, isdone, createddate)
-* DEL    /api/task/:id    D   (_id)
+* POST   /api/authenticate    
+* POST   /api/register        
+* POST   /api/task        C  
+* GET    /api/task        R   
+* GET    /api/task/:id    R 
+* PUT    /api/task/:id    U   
+* DEL    /api/task/:id    D  
 
 ## Test Case
 
