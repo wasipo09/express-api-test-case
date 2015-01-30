@@ -3,12 +3,13 @@ var request = require('superagent');
 var expect = require('expect.js');
 
   //URL
-var url = 'http://taskapitest.herokuapp.com/api';
+var url = 'localhost:3000/api';
   
   //Authentication Information
-  var user = 'test111';
-  var pass = 'test111';
-  var name = 'test111';
+  var source = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0,v=c=='x'?r:r&0x3|0x8;return v.toString(16);});
+  var user = source;
+  var pass = source;
+  var name = source;
 
   //Variables
   var token = '';
